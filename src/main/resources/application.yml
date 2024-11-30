@@ -1,1 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/bugi_market
+    username: root
+    password: 6091
+    driver-class-name: org.mariadb.jdbc.Driver
 
+  jpa:
+    hibernate:
+      ddl-auto: update  # 데이터베이스 스키마 자동 업데이트 (개발 중에만 사용)
+    show-sql: true       # 실행되는 SQL 로그 출력
+    properties:
+      hibernate:
+        format_sql: true # SQL을 보기 좋게 포맷팅
