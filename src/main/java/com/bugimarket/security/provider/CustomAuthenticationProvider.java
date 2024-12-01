@@ -2,7 +2,6 @@ package com.bugimarket.security.provider;
 
 
 import com.bugimarket.user.domain.User;
-import com.bugimarket.user.repository.UserRepository;
 import com.bugimarket.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -29,7 +28,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 
         // 사용자 정보 로드
-        User user = userRepository.findByEmail(email);
+        User user = userService.findByEmail(email);
 
         if (user == null) {
             throw new BadCredentialsException("Invalid email");

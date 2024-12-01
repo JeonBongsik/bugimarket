@@ -12,3 +12,8 @@ spring:
     properties:
       hibernate:
         format_sql: true # SQL을 보기 좋게 포맷팅
+
+
+token:
+  expiration_time: 86400000
+  secret: 4oCYbGVhLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtbmZ0LXNwcmluZy1ib290LWp3dC10dXRvcmlhbOKAmQo=
