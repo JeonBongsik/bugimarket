@@ -5,6 +5,7 @@ import com.bugimarket.user.domain.User;
 import com.bugimarket.user.dto.LoginRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -13,14 +14,23 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+
+
+
+
 
 @RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
+
+
+
+
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -46,10 +56,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
 
        User authenticatedUser = ((User) authResult.getPrincipal());
+
 
        String createdToken = jwtTokenProvider.createJwt(authenticatedUser.getUserId().toString());
 
@@ -58,7 +69,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setContentType("application/json; charset=UTF-8");
         response.getWriter().write("{\"message\": \"로그인 성공 + 토큰 발급 완료!!\"}");
         response.getWriter().flush();
-
     }
 
     @Override

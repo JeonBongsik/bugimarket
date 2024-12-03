@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @RequiredArgsConstructor
 @Component
-public class CustomAuthenticationProvider implements AuthenticationProvider {
+public class LoginAuthenticationProvider implements AuthenticationProvider {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
