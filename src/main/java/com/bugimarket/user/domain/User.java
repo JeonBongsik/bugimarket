@@ -30,5 +30,8 @@ public class User {
         this.nickName = nickName;
     }
 
+    public void changeFirstTrack(Track firstTrack) {this.firstTrack = firstTrack;}
+    public void changeSecondTrack(Track secondTrack) {this.secondTrack = secondTrack;}
+
 
 }
